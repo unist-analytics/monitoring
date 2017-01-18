@@ -40,7 +40,7 @@ training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector
 ## This is all features after removing unrelated time-related features. We will select among them. ###
 
 features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD"
-             ,"X1ST_TS_LOC"  # by using c we put features in a list or vector based look
+             ,"X1ST_TS_LOC"  # by using c we put all features in a list or vector based look
              ,"X2ND_TS_LOC"
              ,"X3RD_TS_LOC"
              ,"BOD_ID"
