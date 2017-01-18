@@ -1,6 +1,7 @@
 ####################### set up working directory  ##################################################
 
-setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
+#setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
+setwd("E:/opencode/") # by using setwd we have to direct the location of our data
 
 
 ######################## read training and testing dataset #########################################
@@ -15,10 +16,15 @@ names(testing)[2]="POL_ETD"
 
 ############################ Feature Selection using RPART #########################################
 
-library(rpart)
-library(partykit)
+library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
+#rpart used to recursive partioning for CART algorithm
+
+library(partykit) #this library is used for visualization as graphs, histograms and etc...
+
 #training=read.csv("training_98473.csv", header=T)
 #names(training)[2]="POL_ETD"
+
+#both of these libraries are used to select important features before the departure of vessel for detection of delay
 
 #If you want to add additional features, add them to training and testing dataset
 POL_D=as.numeric(as.Date(training$POL_ETD)<as.Date(training$POL_ATD))
