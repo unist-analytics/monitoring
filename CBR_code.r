@@ -35,12 +35,12 @@ num.stopby=
   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC=="NULL")&(training$X1ST_TS_LOC=="NULL"))*0
 
 
-training=cbind(training,POL_D,num.stopby)
+training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector by column
 
 ## This is all features after removing unrelated time-related features. We will select among them. ###
 
 features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD"
-             ,"X1ST_TS_LOC"
+             ,"X1ST_TS_LOC"  # by using c we put features in a list or vector based look
              ,"X2ND_TS_LOC"
              ,"X3RD_TS_LOC"
              ,"BOD_ID"
@@ -55,7 +55,7 @@ features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_
              ,"VOYAGE_NO"
              ,"ITEM_CD","POL_D","num.stopby")
 
-y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA))
+y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA)) #numeric interpretation of data
 training_y=cbind(training[,features],y)
 fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
 
