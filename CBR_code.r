@@ -55,7 +55,9 @@ features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_
              ,"VOYAGE_NO"
              ,"ITEM_CD","POL_D","num.stopby")
 
-y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA)) #numeric interpretation of data
+y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA)) #numeric interpretation of data given in training data file
+#BL_LAST_ETA_DATETIME is one line and POD_ATA is second line of training data file. so we consider only dates which happened earlier, because condition
+#is POD_ATA as date should be greater than BL_LAST_ETA_DATETIME. So we get that dates as numbers and equal it to y.
 training_y=cbind(training[,features],y)
 fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
 
@@ -76,7 +78,7 @@ comparison=c()
 
 for(j in 1:nrow(testing)){
 
-	values=as.matrix(testing[j,check_list])  # new case feature values
+	values=as.matrix(testing[j,check_list])  # retrieve step of CBR of 5R cycle. In this line we obtain new case
 	similar_cases=training_y
 
 	for(i in 1:length(values)){
