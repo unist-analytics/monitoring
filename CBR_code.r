@@ -84,8 +84,8 @@ for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of te
 	for(i in 1:length(values)){ # having length of values and by "for" loop we go through of each these values in length
 		if(sum(similar_cases[,check_list[i]]==values[i])>0){             # The size of similar cases should be >0 
 		  similar_cases=similar_cases[similar_cases[,check_list[i]]==values[i],]  # similar cases
-		}
-	}
+		} #check_list = important features
+	}   #to use CRB algorithm we have to have at least one same feature that's why sum of siimilar cases should be greater than 0
 
 	prob_delay=sum(similar_cases$y==1)/nrow(similar_cases)  ## calculate probability of delay
 	testing_delay=as.numeric(as.Date(testing[j,"BL_LAST_ETA_DATETIME"]) < as.Date(testing[j,"POD_ATA"])) # delay or not from testing dataset, delay ==> 1
