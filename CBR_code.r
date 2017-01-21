@@ -76,12 +76,12 @@ check_list=names(fit$variable.importance)
 
 comparison=c()
 
-for(j in 1:nrow(testing)){
+for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of testing file
 
 	values=as.matrix(testing[j,check_list])  # retrieve step of CBR of 5R cycle. In this line we obtain new case
 	similar_cases=training_y
 
-	for(i in 1:length(values)){
+	for(i in 1:length(values)){ # having length of values and by "for" loop we go through of each these values in length
 		if(sum(similar_cases[,check_list[i]]==values[i])>0){             # The size of similar cases should be >0 
 		  similar_cases=similar_cases[similar_cases[,check_list[i]]==values[i],]  # similar cases
 		}
