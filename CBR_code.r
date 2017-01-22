@@ -90,9 +90,11 @@ for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of te
 	prob_delay=sum(similar_cases$y==1)/nrow(similar_cases)  ## calculate probability of delay
 	testing_delay=as.numeric(as.Date(testing[j,"BL_LAST_ETA_DATETIME"]) < as.Date(testing[j,"POD_ATA"])) # delay or not from testing dataset, delay ==> 1
 
-	pred_s_or_f=as.numeric(prob_delay>0.5)  # 0 or 1
+	pred_s_or_f=as.numeric(prob_delay>0.5)  # 0 or 1 (zero means arrival on time, one means late arrival based on similar cases which retrieved fron case base(as a historical data)
 	
-  # This is for comparison as the thresholds
+#### written above coding file is all about detection of delay regarding on vessel departure  
+	
+# This is for comparison as the thresholds
 	experiments=c()
 	for(thresholds in seq(0.2,0.8,0.05)){
 		experiments=c(experiments,as.numeric(prob_delay>thresholds))
