@@ -115,7 +115,7 @@ s_or_f
 #names(temp)=c("LT","Delay")
 #temp[order(xx),]
 
-comparison=comparison[!is.na(comparison[,1]),]
+comparison=comparison[!is.na(comparison[,1]),] #exclamation sign is logical NOT operator...is.na(comparison) returns TRUE of comparison is missing
 accuracy=sum(comparison[,1]==comparison[,2])/nrow(comparison)
 accuracy
 
@@ -124,6 +124,7 @@ zero_zero=sum((comparison[,1]==0)&(comparison[,2]==0))/sum(comparison[,2]==0)  #
 type2=sum(comparison[,1]<comparison[,2])/nrow(comparison) #probability that a case is predicted as not delayed when it is in fact delayed.
 type1=sum(comparison[,1]>comparison[,2])/nrow(comparison) #probability that a case is predicted as delayed when it is in fact not delayed.
 ## sum of type1 and type2 have to be 1.
+
 #visualization
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
