@@ -92,7 +92,10 @@ for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of te
 
 	pred_s_or_f=as.numeric(prob_delay>0.5)  # 0 or 1 (zero means arrival on time, one means late arrival based on similar cases which retrieved fron case base(as a historical data)
 	
-#### written above coding file is all about detection of delay regarding on vessel departure  
+####  If the ratio of delayed cases to all similar cases is greater than a predetermined delay threshold, 
+####  the corresponding new case is predicted to be delayed.
+	
+	#### written above coding file is all about detection of delay regarding on vessel departure  
 	
 # This is for comparison as the thresholds
 	experiments=c()
@@ -118,9 +121,9 @@ accuracy
 
 one_one=sum((comparison[,1]==1)&(comparison[,2]==1))/sum(comparison[,2]==1)  ### P( pred=1 | true is 1)
 zero_zero=sum((comparison[,1]==0)&(comparison[,2]==0))/sum(comparison[,2]==0)  ### P( pred=0 | true is 0)
-type2=sum(comparison[,1]<comparison[,2])/nrow(comparison)
-type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)
-
+type2=sum(comparison[,1]<comparison[,2])/nrow(comparison) #probability that a case is predicted as not delayed when it is in fact delayed.
+type1=sum(comparison[,1]>comparison[,2])/nrow(comparison) #probability that a case is predicted as delayed when it is in fact not delayed.
+## sum of type1 and type2 have to be 1.
 #visualization
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
