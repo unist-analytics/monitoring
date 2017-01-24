@@ -162,7 +162,9 @@ legend(0.65, 0.8, c("Accuracy", "Type I", "Type II", "P(F=1|A=1)","P(F=0|A=0)"),
 
 
 ############################ Feature Selection using similarity score##############################
-library(plyr)
+library(plyr) #install plyr library from R packages to use tools for splitting, applying and combining data
+#for example when you need to break a big problem down into manageable pieces, operate on each piece and 
+#then put all the pieces back together so this library can used.
 
 y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA))
 
