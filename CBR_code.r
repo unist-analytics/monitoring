@@ -35,7 +35,7 @@ num.stopby=
   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC=="NULL")&(training$X1ST_TS_LOC=="NULL"))*0
 
 
-training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector by column
+training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector by column.
 
 ## This is all features after removing unrelated time-related features. We will select among them. ###
 
