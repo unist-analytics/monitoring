@@ -210,6 +210,9 @@ for (m in 1:length(features)){
 features_ordered=res[order(res[,2],decreasing = T),]
 check_list=features_ordered[1:15,1]
 
+### so the directory of these plots is already set as setwd("E:/opencode/"). setwd("E:/opencode/") is where all of R data files are located
+### so by running code below you can save plot in disk. 
+
 pdf('rplot.pdf') # by the code below we can directly save our R file plot in disk as pdf file.
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
@@ -218,7 +221,7 @@ hist(comparison[,3], xlab="The size of similar cases", main="")
 dev.off()
 
 
-seq(0.2,0.8,0.05)
+seq(0.2,0.8,0.05)# this code is proceeded in the same way as done above. 
 adjust_result=c()
 for(k in c(4:16)){ 
   accuracy=sum(comparison[,k]==comparison[,2])/nrow(comparison)
@@ -229,7 +232,7 @@ for(k in c(4:16)){
   adjust_result=rbind(adjust_result,c(accuracy,type1,type2,one_one,zero_zero))
 }
 adjust_result=cbind(adjust_result,seq(0.2,0.8,0.05))
-png('rplot.png') # Here it is extraction of image to directly to the disk
+png('rplot.png') # Here it is extraction of image to directly to the disk as an png file.
 plot(adjust_result[,6],adjust_result[,1],lwd=2,type="l", ylim=c(0,1),xlab="Parameter", ylab="Accuracy")
 lines(adjust_result[,6],adjust_result[,2],lwd=2,col=2)
 lines(adjust_result[,6],adjust_result[,3],lwd=2,col=3,lty=2)
