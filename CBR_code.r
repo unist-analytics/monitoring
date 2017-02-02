@@ -210,7 +210,12 @@ for (m in 1:length(features)){
 features_ordered=res[order(res[,2],decreasing = T),]
 check_list=features_ordered[1:15,1]
 
-
+pdf('rplot.pdf') # by the code below we can directly save our R file plot in disk as pdf file.
+comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
+plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
+points(comparison2[,2],col=comparison2[,3],pch=19)
+hist(comparison[,3], xlab="The size of similar cases", main="")
+dev.off()
 
 
 
