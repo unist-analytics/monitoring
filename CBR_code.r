@@ -229,7 +229,7 @@ for(k in c(4:16)){
   adjust_result=rbind(adjust_result,c(accuracy,type1,type2,one_one,zero_zero))
 }
 adjust_result=cbind(adjust_result,seq(0.2,0.8,0.05))
-pdf('rplot.pdf') # Here it is extraction of image to directly to the disk
+png('rplot.png') # Here it is extraction of image to directly to the disk
 plot(adjust_result[,6],adjust_result[,1],lwd=2,type="l", ylim=c(0,1),xlab="Parameter", ylab="Accuracy")
 lines(adjust_result[,6],adjust_result[,2],lwd=2,col=2)
 lines(adjust_result[,6],adjust_result[,3],lwd=2,col=3,lty=2)
