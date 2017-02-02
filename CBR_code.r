@@ -212,6 +212,7 @@ check_list=features_ordered[1:15,1]
 
 ### so the directory of these plots is already set as setwd("E:/opencode/"). setwd("E:/opencode/") is where all of R data files are located
 ### so by running code below you can save plots in disk. in our case is "E:/opencode/". 
+### "E:/opencode/" is my working directory....
 
 pdf('rplot.pdf') # by the code below we can directly save our R file plot in disk as pdf file.
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
