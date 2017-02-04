@@ -31,4 +31,4 @@ Steps to use R script in command prompt:
 
 Just repeat step 5 by passing any *.R file as argument with full path and it will execute as expected.
 
-In my case: Rscript E:\opencode\CBR_code.R and hit ENTER
+In my case: Rscript E:\opencode\CBR_code.R and hit ENTER.
