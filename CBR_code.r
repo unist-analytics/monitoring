@@ -7,8 +7,8 @@ setwd("E:/opencode/") # by using setwd we have to direct the location of our dat
 ######################## read training and testing dataset #########################################
 
 
-training=read.csv("training_98473.csv", header=T)
-testing=read.csv("testing_98473.csv", header=T)
+training=read.csv("training_98473.csv", header=T) #our data set file
+testing=read.csv("testing_98473.csv", header=T)   #our data sst file
 names(training)[2]="POL_ETD"
 names(testing)[2]="POL_ETD"
 
@@ -40,7 +40,8 @@ training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector
 ## This is all features after removing unrelated time-related features. We will select among them. ###
 
 features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD"
-             ,"X1ST_TS_LOC"  # by using c we put all features in a list or vector based look
+             ,"X1ST_TS_LOC"      
+	                                   # by using c we put all features in a list or vector based look
              ,"X2ND_TS_LOC"
              ,"X3RD_TS_LOC"
              ,"BOD_ID"
@@ -129,7 +130,6 @@ type1=sum(comparison[,1]>comparison[,2])/nrow(comparison) #probability that a ca
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
 points(comparison2[,2],col=comparison2[,3],pch=19)
-
 hist(comparison[,3], xlab="The size of similar cases", main="")
 
 #### adjust parameter
