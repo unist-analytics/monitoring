@@ -217,8 +217,9 @@ res=c() # for the values in res we can distinguish intervals
 for (m in 1:length(features)){ # setting a length of features by looping for each m going through training data file.
   if((length(unique(training[,features[m]]))<100)&(length(unique(training[,features[m]]))>1)){
 	#if the length of unique features of training file for each "m" should be less than 100 and  greater than 1 as conditional interval  
-    temp=ddply(training_y, features[m], c(similarity,nrow)) #ddply is a function of "plur" package in R software		
-    res=rbind(res,c(features[m],temp$V1%*%(temp$V2/sum(temp$V2))))
+    temp=ddply(training_y, features[m], c(similarity,nrow)) #ddply is a function of "plur" package in R software. by ddply we can split data frame, 
+	 #apply certain function and return back result in data frame.		
+    res=rbind(res,c(features[m],temp$V1%*%(temp$V2/sum(temp$V2)))) # 
   }
 }
 features_ordered=res[order(res[,2],decreasing = T),]
