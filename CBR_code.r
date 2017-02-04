@@ -1,26 +1,33 @@
 ####################### set up working directory  ##################################################
 
-setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
-
+#setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
+setwd("E:/opencode/") # by using setwd we have to direct the location of our data
+# so the location of script and data files should be in one folder, so that code could extract data.
 
 ######################## read training and testing dataset #########################################
 
 
-training=read.csv("training_98473.csv", header=T)
-testing=read.csv("testing_98473.csv", header=T)
-names(training)[2]="POL_ETD"
-names(testing)[2]="POL_ETD"
+training=read.csv("training_98473.csv", header=T) # Here is extraction of infomation by reading training data file
+testing=read.csv("testing_98473.csv", header=T)   # Here is extraction of infomation by reading testing data file
+names(training)[2]="POL_ETD" # Here we set the name of our training data file as "POL_ETD"
+names(testing)[2]="POL_ETD" # Here we set the name of our testing data file as "POL_ETD" too
 
 #check_list=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD","ITEM_CD")
 
 ############################ Feature Selection using RPART #########################################
 
-library(rpart)
-library(partykit)
+library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
+#rpart used to recursive partioning for CART algorithm
+
+library(partykit) #this library is used for visualization as graphs, histograms and etc... to obtain data plots.
+
+#both of these libraries are used to select important features before the departure of vessel for detection of delay
+
 #training=read.csv("training_98473.csv", header=T)
 #names(training)[2]="POL_ETD"
 
 #If you want to add additional features, add them to training and testing dataset
+
 POL_D=as.numeric(as.Date(training$POL_ETD)<as.Date(training$POL_ATD))
 num.stopby=
   as.numeric(training$X3RD_TS_LOC!="NULL")*3+
@@ -29,13 +36,19 @@ num.stopby=
   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC=="NULL")&(training$X1ST_TS_LOC=="NULL"))*0
 
 
-training=cbind(training,POL_D,num.stopby)
+training=cbind(training,POL_D,num.stopby) #cbind combines data, matrix or vector by column
 
 ## This is all features after removing unrelated time-related features. We will select among them. ###
 
+#Since the research paper is constraucted on two main meanings of early detection of vessels:
+# 1. Prior to vessel departure 2. real-time cases implementation
+# So in first part(Prior to vessel departure) CBR cycle uses previous historical data as case-base(actions made before).However, important
+#step is retrieval step where we should define the best case. "Best means closest, similar case to the previous case to solve new, future cases.
+#That's why to find that similarity, there is a question: "How similariy of new and previous cases are exemplified?" among given below features.
+
 features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD"
              ,"X1ST_TS_LOC"
-             ,"X2ND_TS_LOC"
+             ,"X2ND_TS_LOC"                # by using c we put all features in a list or vector based look
              ,"X3RD_TS_LOC"
              ,"BOD_ID"
              ,"CORP_ID"
@@ -49,9 +62,13 @@ features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_
              ,"VOYAGE_NO"
              ,"ITEM_CD","POL_D","num.stopby")
 
-y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA))
+y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA))#numeric interpretation of data given in training data file
+#BL_LAST_ETA_DATETIME is one line and POD_ATA is second line of training data file. so we consider only dates which happened earlier, because condition
+#is POD_ATA as date should be greater than BL_LAST_ETA_DATETIME. So we get that dates as numbers and equal it to y...
+
 training_y=cbind(training[,features],y)
 fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
+#Here rpart function is used where CART algorithm is defined to find important features by classification and regression trees.
 
 
 check_list=names(fit$variable.importance)
@@ -68,14 +85,15 @@ check_list=names(fit$variable.importance)
 
 comparison=c()
 
-for(j in 1:nrow(testing)){
+for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of testing file
 
-	values=as.matrix(testing[j,check_list])  # new case feature values
+	values=as.matrix(testing[j,check_list])  # retrieve step of CBR of 5R cycle. In this line we obtain new case and set it as values
 	similar_cases=training_y
 
-	for(i in 1:length(values)){
-		if(sum(similar_cases[,check_list[i]]==values[i])>0){             # The size of similar cases should be >0 
-		  similar_cases=similar_cases[similar_cases[,check_list[i]]==values[i],]  # similar cases
+	for(i in 1:length(values)){ # having length of values and by "for" loop we go through each of these values in length
+		if(sum(similar_cases[,check_list[i]]==values[i])>0){   # The size of similar cases should be >0 , because
+		  #
+			similar_cases=similar_cases[similar_cases[,check_list[i]]==values[i],]  # similar cases
 		}
 	}
 
