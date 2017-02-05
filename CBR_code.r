@@ -138,9 +138,9 @@ type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a cas
 ## sum of type1 and type2 have to be 1.
 
 #visualization
-comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)
-plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
-points(comparison2[,2],col=comparison2[,3],pch=19)
+comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1) #Here is histogram and plot extraction part. 
+plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)           #However, we can extract image not only as histgram but also as
+points(comparison2[,2],col=comparison2[,3],pch=19)                  # boxplot, pie charts, scatter plots, density plots and kernel density.
 hist(comparison[,3], xlab="The size of similar cases", main="")
 
 #### adjust parameter
