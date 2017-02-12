@@ -1,6 +1,6 @@
 ####################### set up working directory  ##################################################
 
-#setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
+
 setwd("E:/opencode/") # by using setwd we have to direct the location of our data
 # so the location of script and data files should be in one folder, so that code could extract data.
 
