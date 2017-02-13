@@ -1,10 +1,11 @@
 ####################### set up working directory  ##################################################
 
 
-setwd(file.path("E:/opencode/"))#It’s often convenient to use file.path() in setting the working directory. By this way we are able to 
+setwd(file.path("E:/opencode/input"))#It’s often convenient to use file.path() in setting the working directory. By this way we are able to 
 #specify a cascade of drive letters and folder names, and file.path() then assembles these into a proper file path
 # by using setwd we have to direct the location of our data
 # so the location of script and data files should be in one folder, so that code could extract data.
+# I have seperate input folder from where I load data and script. and save plots in seperate output folder.
 
 ######################## read training and testing dataset #########################################
 
