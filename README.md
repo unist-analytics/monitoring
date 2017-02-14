@@ -17,4 +17,4 @@ Steps to use R script in command prompt:
 
 Just repeat step 5 by passing any *.R file as argument with full path and it will execute as expected.
 
-In my case: R CMD BATCH E:\opencode\input\CBR_code.R and hit ENTER
+In my case: R CMD BATCH E:\opencode\output\CBR_code.R and hit ENTER
