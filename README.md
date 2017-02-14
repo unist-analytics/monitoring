@@ -11,10 +11,10 @@ Steps to use R script in command prompt:
   In the field ‘Variable Value:’, paste the clipboard value, ie ‘C:\Program Files\R\R-3.3.2\bin\x64’. Add a semicolon ‘;’ after that. 
   So ,click on ‘Ok’ button as many times to dismiss all dialog boxes.
   
-4.Open command prompt and type ‘Rscript’ and press ENTER.
+4.Open command prompt and type ‘R CMD BATCH’ and press ENTER.
 
-5.Now that you have Rscript on your path, you can run R code from any directory on your system.
+5.Now that you have R CMD BATCH on your path, you can run R code from any directory on your system.
 
 Just repeat step 5 by passing any *.R file as argument with full path and it will execute as expected.
 
-In my case: Rscript E:\opencode\CBR_code.R and hit ENTER
+In my case: R CMD BATCH E:\opencode\input\CBR_code.R and hit ENTER
