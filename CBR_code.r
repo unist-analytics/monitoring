@@ -19,6 +19,13 @@ names(testing)[2]="POL_ETD" # Here we set the name of our testing data file as "
 
 ############################ Feature Selection using RPART #########################################
 
+##### before running a code we should install R packages. 
+   #You can install it from menu window at the bottom of the right side. From "Packages" section then press install. choose any certain 
+   #package and again press install.  
+          #OR
+   #In console you can type in: install.packages("any package you want")
+   # For instance:  install.packages("plyr") and run it
+
 library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
 #rpart used to recursive partioning for CART algorithm
 
