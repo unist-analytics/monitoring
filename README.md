@@ -11,11 +11,11 @@ Steps to use R script in command prompt:
   In the field ‘Variable Value:’, paste the clipboard value, ie ‘C:\Program Files\R\R-3.3.2\bin\x64’. Add a semicolon ‘;’ after that. 
   So ,click on ‘Ok’ button as many times to dismiss all dialog boxes.
   
-4.Open command prompt and type ‘R CMD BATCH’ and press ENTER.
+4.Open command prompt.
 
-5.Now that you have R CMD BATCH on your path, you can run R code from any directory on your system.
+5.Type "R CMD BATCH + directory where you want to store your rout file and press ENTER.
 
-Just repeat step 5 by passing any *.R file as argument with full path and it will execute as expected.
+plus you run R code form any directory of your system.
 
 In my case: R CMD BATCH E:\opencode\output\CBR_code.R and hit ENTER
 
