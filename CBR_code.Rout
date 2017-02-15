@@ -1,0 +1,71 @@
+
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ####################### set up working directory  ##################################################
+> setwd(file.path("E:/opencode/input"))
+> 
+> ######################## read training and testing dataset #########################################
+> 
+> 
+> training=read.csv("training_98473.csv", header=T)
+> testing=read.csv("testing_98473.csv", header=T)
+> names(training)[2]="POL_ETD"
+> names(testing)[2]="POL_ETD"
+> 
+> #check_list=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD","ITEM_CD")
+> 
+> ############################ Feature Selection using RPART #########################################
+> 
+> library(rpart)
+> library(partykit)
+Loading required package: grid
+> 
+> 
+> #If you want to add additional features, add them to training and testing dataset
+> POL_D=as.numeric(as.Date(training$POL_ETD)<as.Date(training$POL_ATD))
+> num.stopby=
++   as.numeric(training$X3RD_TS_LOC!="NULL")*3+
++   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC!="NULL"))*2+
++   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC=="NULL")&(training$X1ST_TS_LOC!="NULL"))*1+
++   as.numeric((training$X3RD_TS_LOC=="NULL")&(training$X2ND_TS_LOC=="NULL")&(training$X1ST_TS_LOC=="NULL"))*0
+> 
+> 
+> training=cbind(training,POL_D,num.stopby)
+> 
+> ## This is all features after removing unrelated time-related features. We will select among them. ###
+> 
+> features=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD"
++              ,"X1ST_TS_LOC"
++              ,"X2ND_TS_LOC"
++              ,"X3RD_TS_LOC"
++              ,"BOD_ID"
++              ,"CORP_ID"
++              ,"DIR_PRGS_YN"
++              ,"FI_PAY_COND_CD"
++              ,"INCO_CD"
++              ,"POD_LOC"
++              ,"SHPR_ID"
++              ,"SHPR_PLANT_CD"
++              ,"VESSLE_NAME"
++              ,"VOYAGE_NO"
++              ,"ITEM_CD","POL_D","num.stopby")
+> 
+> y=as.numeric(as.Date(training$BL_LAST_ETA_DATETIME) < as.Date(training$POD_ATA))
+> training_y=cbind(training[,features],y)
+> fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
