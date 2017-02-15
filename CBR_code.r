@@ -81,7 +81,8 @@ fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
 
 check_list=names(fit$variable.importance)
 #check_list=c("VOYAGE_NO","ITEM_CD","ACT_ROUTE_ID", "BOD_ID" ,"VESSLE_NAME","LANE_ID", "CNEE_ID","FINAL_DEST","LSP_ID","CARR_ID")
-
+#above in check_list are important features chosen by CART algorithm combined
+#as matrix.
 ######################################################################
 
 
@@ -118,10 +119,6 @@ for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of te
 }
 
 #### written above code is all about detection of delay prior to vessel departure. 
-
-comparison[,1:3]
-#pred_s_or_f
-#s_or_f
 
 comparison=comparison[!is.na(comparison[,1]),]#exclamation sign is logical NOT operator...is.na(comparison) returns TRUE of comparison is missing
 accuracy=sum(comparison[,1]==comparison[,2])/nrow(comparison)
@@ -204,10 +201,9 @@ features=names(training)
 similarity=function(dat){
   y=dat$y
   abs(sum(y==1)-sum(y==0))/length(y)
-  #max(sum(y==1),sum(y==0))/length(y)
+  
 }
 
-#unique(training[,features[16]])
 # the written below code is for extracting unique features in training data file
 res=c() # for the values in res we can distinguish intervals
 for (m in 1:length(features)){ # setting a length of features by looping for each m going through training data file.
