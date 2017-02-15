@@ -1,0 +1,35 @@
+
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ####################### set up working directory  ##################################################
+> 
+> #setwd("/Users/sungilkim/Dropbox/CBR/JORS/revision/R_code")
+> #setwd("E:/opencode")
+> setwd(file.path("E:", "opencode", "output"))
+> #tk_choose.dir(default = "", caption ="E:/opencode")
+> ######################## read training and testing dataset #########################################
+> 
+> 
+> training=read.csv("training_98473.csv", header=T)
+Error in file(file, "rt") : cannot open the connection
+Calls: read.csv -> read.table -> file
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'training_98473.csv': No such file or directory
+Execution halted
