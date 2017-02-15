@@ -1,6 +1,5 @@
 ####################### set up working directory  ##################################################
 
-
 setwd(file.path("E:/opencode/input"))#It’s often convenient to use file.path() in setting the working directory. By this way we are able to 
 #specify a cascade of drive letters and folder names, and file.path() then assembles these into a proper file path
 # by using setwd we have to direct the location of our data
@@ -33,8 +32,7 @@ library(partykit) #this library is used for visualization as graphs, histograms 
 
 #both of these libraries are used to select important features before the departure of vessel for detection of delay
 
-#training=read.csv("training_98473.csv", header=T)
-#names(training)[2]="POL_ETD"
+
 
 #If you want to add additional features, add them to training and testing dataset
 
@@ -84,12 +82,6 @@ fit <- rpart(y ~ ., data = training_y,parms=list(split='information'))
 check_list=names(fit$variable.importance)
 #check_list=c("VOYAGE_NO","ITEM_CD","ACT_ROUTE_ID", "BOD_ID" ,"VESSLE_NAME","LANE_ID", "CNEE_ID","FINAL_DEST","LSP_ID","CARR_ID")
 
-
-#party.fit <- as.party(fit)
-#plot(party.fit, type='extended')
-
-
-
 ######################################################################
 
 
@@ -128,14 +120,8 @@ for(j in 1:nrow(testing)){ # by using "for" loop we go through of each row of te
 #### written above code is all about detection of delay prior to vessel departure. 
 
 comparison[,1:3]
-pred_s_or_f
-s_or_f
-# aa=training[rownames(training_y)%in%rownames(extract),] # for tracking analysis
-#xx=as.Date(aa$POD_ATA)-as.Date(aa$POL_ATD)
-#plot(xx~extract$y)
-#temp=data.frame(cbind(xx,extract$y))
-#names(temp)=c("LT","Delay")
-#temp[order(xx),]
+#pred_s_or_f
+#s_or_f
 
 comparison=comparison[!is.na(comparison[,1]),]#exclamation sign is logical NOT operator...is.na(comparison) returns TRUE of comparison is missing
 accuracy=sum(comparison[,1]==comparison[,2])/nrow(comparison)
