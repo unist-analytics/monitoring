@@ -18,16 +18,7 @@ testing=read.csv("testing_98473.csv", header=T)   # Here is extraction of infoma
 names(training)[2]="POL_ETD" # Here we set the name of our training data file as "POL_ETD"
 names(testing)[2]="POL_ETD" # Here we set the name of our testing data file as "POL_ETD" too
 
-#check_list=c("ACT_ROUTE_ID","ARRIVAL_PORT","CARR_ID","CNEE_ID","FINAL_DEST","LANE_ID","LSP_ID","LOADING_PORT","SHPR_PLANT_CD","ITEM_CD")
-
 ############################ Feature Selection using RPART #########################################
-
-##### before running a code we should install R packages. 
-   #You can install it from menu window at the bottom of the right side. From "Packages" section then press install. choose any certain 
-   #package and again press install.  
-          #OR
-   #In console you can type in: install.packages("any package you want")
-   # For instance:  install.packages("plyr") and run it
 
 library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
 #rpart used to recursive partioning for CART algorithm
@@ -35,8 +26,6 @@ library(rpart) #here rpart library is opended as a function to run a code contin
 library(partykit) #this library is used for visualization as graphs, histograms and etc... to obtain data plots.
 
 #both of these libraries are used to select important features before the departure of vessel for detection of delay
-
-
 
 #If you want to add additional features, add them to training and testing dataset
 
@@ -220,10 +209,6 @@ for (m in 1:length(features)){ # setting a length of features by looping for eac
 }
 features_ordered=res[order(res[,2],decreasing = T),]
 check_list=features_ordered[1:15,1]
-
-### so the directory of these plots is already set as setwd("E:/opencode/"). setwd("E:/opencode/") is where all of R data files are located
-### so by running code below you can save plots in disk. in our case is "E:/opencode/". 
-### "E:/opencode/" is my working directory....
 
 pdf('E:/opencode/output/visualization.pdf') # by the code below we can directly save our R file plot in disk as pdf file. By this line of code
 # it can be directly saved in our directory we set above in output folder.
