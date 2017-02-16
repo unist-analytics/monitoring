@@ -21,6 +21,12 @@ names(testing)[2]="POL_ETD" # Here we set the name of our testing data file as "
 
 ############################ Feature Selection using RPART #########################################
 
+list.of.packages <- c("rpart", "partykit","plyr") # automatic installation of needed packages
+packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(packages)) install.packages(packages) 
+lapply(packages, require, character.only=T)
+
+
 library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
 #rpart used to recursive partioning for CART algorithm
 
