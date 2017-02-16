@@ -1,29 +1,37 @@
+***Before running a code, be sure that you have installed all related packages.***
+
+1st way:
+
+On MS Windows:
+1.Choose Install Packages from the Packages menu.
+2.Select a CRAN Mirror. (e.g. Norway)
+3.Type in package that you want to installed. (e.g. boot)
+4.Then use the library(package) function to load it for use. (e.g. library(boot))
+
+On Linux:
+Download the package of interest as a compressed file.
+At the command prompt, install it using 
+R CMD INSTALL [options] [l-lib] pkgs
+Use the library(package) function within R to load it for use in the session.
+
+2nd way:
+In console of R you can type in:
+
+install.packages("the package's name that you want to install")
+library(package's name)
 
 
+***Steps to use R script in command prompt:***
+http://shashiasrblog.blogspot.kr/2013/10/vba-front-end-for-r.html Here is a link to set enviromental variables and let command prompt to know the path of R program. 
+
+After you set R program's path -> Open command prompt(find in through windows panel or by run function as "cmd") 
+
+Type "R CMD BATCH + directory where you want to store your rout file + name_of_your.R file and press ENTER. 
+
+For instance: R CMD BATCH "E:/opencode/output/CBR_code.R"
+
+***But be sure that directory where you want to store your file in command propmt is same with directory in R script, otherwise you will get an error.*** 
+
+***you can run R code from any directory of your system.***
 
 
-
-
-
-Steps to use R script in command prompt:
-
-1.Suppose you have the R CMD BATCH installed in the following directory: ‘C:\Program Files\R\R-3.3.2\bin\x64’. Copy this path to your clipboard.
-
-2.Configurations in Computer Settings as:
-  a. Windows->Control Panel->System and Secuirity-> System ->Advanced system settings ->Enviroment variables
-  
-  b. Then click New
-  
-3.In the field ‘Variable Name:’, type PATH
-  In the field ‘Variable Value:’, paste the clipboard value, ie ‘C:\Program Files\R\R-3.3.2\bin\x64’. Add a semicolon ‘;’ after that. 
-  So ,click on ‘Ok’ button as many times to dismiss all dialog boxes.
-  
-4.Open command prompt.
-
-5.Type "R CMD BATCH + directory where you want to store your rout file and press ENTER.
-
-plus you run R code form any directory of your system.
-
-In my case: R CMD BATCH E:\opencode\output\CBR_code.R and hit ENTER
-
-Finally CBR_code.rout file will be stored in E:\opencode\output\ directory. But you can choose any directory based on your preference.
