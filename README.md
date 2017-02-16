@@ -1,5 +1,11 @@
 ***Before running a code, be sure that you have installed all related packages.***
 
+list.of.packages <- c("xx", "yy") # replace xx and yy with package names
+packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(packages)) install.packages(packages) 
+lapply(packages, require, character.only=T)
+***The code above is auto-installation of necessary packages.***
+
 1st way:
 
 On MS Windows:
