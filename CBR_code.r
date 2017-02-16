@@ -6,6 +6,7 @@
 # so the location of script and data files should be in one folder, so that code could extract data.
 # I have seperate input folder from where I load data and script. and save plots in seperate output folder.
 
+filename = "CBR_code.R"
 filepath = file.choose()  # browse and select your_file.R in the window.
 dir = substr(filepath, 1, nchar(filepath)-nchar(filename))
 setwd(dir)
