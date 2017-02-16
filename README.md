@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 Steps to use R script in command prompt:
 
 1.Suppose you have the R CMD BATCH installed in the following directory: ‘C:\Program Files\R\R-3.3.2\bin\x64’. Copy this path to your clipboard.
