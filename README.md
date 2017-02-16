@@ -17,9 +17,12 @@ Use the library(package) function within R to load it for use in the session.
 2nd way:
 In console of R you can type in:
 
-install.packages("the package's name that you want to install")
+install.packages("the package's name that you want to install") Then
 library(package's name)
 
+
+***Recommendation***
+I would recommend to open two seperate folders as: input and output folder. In input folder you can store all related data and code to run your script and save outputs(plots,graphs,etc...) in specific output folder. 
 
 ***Steps to use R script in command prompt:***
 http://shashiasrblog.blogspot.kr/2013/10/vba-front-end-for-r.html Here is a link to set enviromental variables and let command prompt to know the path of R program. 
