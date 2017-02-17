@@ -154,8 +154,8 @@ type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a cas
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)#Here is histogram and plot extraction part. 
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
 points(comparison2[,2],col=comparison2[,3],pch=19) 
-basesave(quote(plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)),'E:/opencode/output/visual1.pdf')
-hist(comparison[,3], xlab="The size of similar cases", main="")
+basesave(quote(plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)),'E:/opencode/output/visual1.pdf')#Locatio where I wish to save plots
+hist(comparison[,3], xlab="The size of similar cases", main="")                                              # adjustable to save plots anywhere you want
 basesave(quote(hist(comparison[,3], xlab="The size of similar cases", main="")), 'E:/opencode/output/visual2.pdf')
 
 #Note that one must use quote, otherwise the plot(x) call is run in the global environment and NULL gets passed to basesave()
