@@ -131,17 +131,17 @@ type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a cas
 ## sum of type1 and type2 have to be 1.
 
 #In some cases one wants to both save and print a base r plot. so there is a utility function to do so. This code below requires stringr package installation.
-  basesave = function(expr, filename, print=T) { 
+  basesave = function(expr, filename, print=T) { #basesave function plots and saves(plot,image)
   #extension
   exten = stringr::str_match(filename, "\\.(\\w+)$")[, 2]
   
-  switch(exten,
+  switch(exten,    #A switch statement allows a variable to be tested for equality against a list of values. 
          pdf = {
            pdf(filename)
-           eval(expr, envir = parent.frame())
+           eval(expr, envir = parent.frame())# parent.frame is the environment from which the closure was invoked.
            dev.off()
          },
-         {stop("filetype not recognized")})
+         {stop("filetype not recognized")}) 
   
   
   #print
@@ -154,9 +154,13 @@ type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a cas
 comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)#Here is histogram and plot extraction part. 
 plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
 points(comparison2[,2],col=comparison2[,3],pch=19) 
-basesave(plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19),'E:/opencode/output/visual1.pdf')
+basesave(quote(plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)),'E:/opencode/output/visual1.pdf')
 hist(comparison[,3], xlab="The size of similar cases", main="")
-basesave(hist(comparison[,3], xlab="The size of similar cases", main=""), 'E:/opencode/output/visual2.pdf')
+basesave(quote(hist(comparison[,3], xlab="The size of similar cases", main="")), 'E:/opencode/output/visual2.pdf')
+
+#Note that one must use quote, otherwise the plot(x) call is run in the global environment and NULL gets passed to basesave()
+#However, we can extract image not only as histgram but also as
+#boxplot, pie charts, scatter plots, density plots and kernel density.hist(comparison[,3], xlab="The size of similar cases", main="")	  
 
 	  
 #### adjust parameter
@@ -259,7 +263,7 @@ for(k in c(4:16)){
   adjust_result=rbind(adjust_result,c(accuracy,type1,type2,one_one,zero_zero))
 }
 adjust_result=cbind(adjust_result,seq(0.2,0.8,0.05))
-png('E:/opencode/output/adjust-parameter-plot.png') # Here it is extraction of image to directly to the disk as an png file.This is the same strategy as done above.
+pdf('E:/opencode/output/adjust-parameter-plot.pdf') # Here it is extraction of image to directly to the disk as an png file.This is the same strategy as done above.
 plot(adjust_result[,6],adjust_result[,1],lwd=2,type="l", ylim=c(0,1),xlab="Parameter", ylab="Accuracy")
 lines(adjust_result[,6],adjust_result[,2],lwd=2,col=2)
 lines(adjust_result[,6],adjust_result[,3],lwd=2,col=3,lty=2)
