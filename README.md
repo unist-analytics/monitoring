@@ -1,11 +1,16 @@
 ***Before running a code, be sure that you have installed all related packages.***
 
+
+***Here is auto-installation of packages***
 list.of.packages <- c("xx", "yy") # replace xx and yy with package names
 packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(packages)) install.packages(packages) 
 lapply(packages, require, character.only=T)
 ***The code above is auto-installation of necessary packages.***
 
+
+
+***Manual installation***
 1st way:
 
 On MS Windows:
@@ -27,8 +32,13 @@ install.packages("the package's name that you want to install") Then
 library(package's name)
 
 
+
+
 ***Recommendation***
-I would recommend to open two seperate folders as: input and output folder. In input folder you can store all related data and code to run your script and save outputs(plots,graphs,etc...) in specific output folder. 
+I would recommend to open two seperate folders as: input and output folder. In input folder you can store all related data and code to run your script and save outputs(plots,graphs,etc...) in specific output folder, since this stores output files in output directory/folder. 
+
+
+
 
 ***Steps to use R script in command prompt:***
 http://shashiasrblog.blogspot.kr/2013/10/vba-front-end-for-r.html Here is a link to set enviromental variables and let command prompt to know the path of R program. 
@@ -38,6 +48,10 @@ After you set R program's path -> Open command prompt(find in through windows pa
 Type "R CMD BATCH + directory where you want to store your rout file + name_of_your.R file and press ENTER. 
 
 For instance: R CMD BATCH "E:/opencode/output/CBR_code.R"
+
+So, you should get your rout file and plot outputs, as you already set as path with R CMB BATCH process.
+
+***One more way to obtain your output files as Rplots, is in directory folder, from where you imported your R script and all data files. 
 
 ***But be sure that directory where you want to store your file in command propmt is same with directory in R script, otherwise you will get an error.*** 
 
