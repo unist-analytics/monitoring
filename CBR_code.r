@@ -19,18 +19,20 @@ names(testing)[2]="POL_ETD" # Here we set the name of our testing data file as "
 
 ############################ Feature Selection using RPART #########################################
 
-list.of.packages <- c("rpart", "partykit","plyr") # automatic installation of needed packages
+list.of.packages <- c("rpart", "partykit","plyr", "stringr") # automatic installation of needed packages. Just type in names of needed packages. 
 packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(packages)) install.packages(packages) 
-lapply(packages, require, character.only=T)
+lapply(packages, require, character.only=T)#lapply will return a list rather than a vector.
 
 
 library(rpart) #here rpart library is opended as a function to run a code continuously, instead of writing code for each case separetely
 #rpart used to recursive partioning for CART algorithm
 
 library(partykit) #this library is used for visualization as graphs, histograms and etc... to obtain data plots.
-
 #both of these libraries are used to select important features before the departure of vessel for detection of delay
+
+library(stringr)# Package to set wrappers. All function and argument names (and positions) are consistent, all functions deal with 
+#"NA"'s and zero length vectors in the same way, and the output from one function is easy to feed into the input of another.	
 
 #If you want to add additional features, add them to training and testing dataset
 
@@ -128,15 +130,37 @@ type2=sum(comparison[,1]<comparison[,2])/nrow(comparison)#probability that a cas
 type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a case is predicted as delayed when it is in fact not delayed.
 ## sum of type1 and type2 have to be 1.
 
+#In some cases one wants to both save and print a base r plot. so there is a utility function to do so. This code below requires stringr package installation.
+  basesave = function(expr, filename, print=T) { 
+  #extension
+  exten = stringr::str_match(filename, "\\.(\\w+)$")[, 2]
+  
+  switch(exten,
+         pdf = {
+           pdf(filename)
+           eval(expr, envir = parent.frame())
+           dev.off()
+         },
+         {stop("filetype not recognized")})
+  
+  
+  #print
+  if (print) eval(expr, envir = parent.frame())
+  
+  invisible(NULL)
+}	
+	
 #visualization
-comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1) #Here is histogram and plot extraction part. 
-plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)           #However, we can extract image not only as histgram but also as
-points(comparison2[,2],col=comparison2[,3],pch=19)                  # boxplot, pie charts, scatter plots, density plots and kernel density.
+comparison2=cbind(comparison[,1:2],(comparison[,1]==comparison[,2])+1)#Here is histogram and plot extraction part. 
+plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19)
+points(comparison2[,2],col=comparison2[,3],pch=19) 
+basesave(plot(comparison2[,1],ylab="Delay(1) or not(0)",col=3,pch=19),'E:/opencode/output/visual1.pdf')
 hist(comparison[,3], xlab="The size of similar cases", main="")
+basesave(hist(comparison[,3], xlab="The size of similar cases", main=""), 'E:/opencode/output/visual2.pdf')
 
+	  
 #### adjust parameter
 
-seq(0.2,0.8,0.05)
 adjust_result=c()
 for(k in c(4:16)){
 accuracy=sum(comparison[,k]==comparison[,2])/nrow(comparison)
@@ -224,7 +248,7 @@ hist(comparison[,3], xlab="The size of similar cases", main="")
 dev.off() # dev. off function is to close open plotting
 
 
-seq(0.2,0.8,0.05)# this code is proceeded in the same way as done above. 
+# this code is proceeded in the same way as done above. 
 adjust_result=c()
 for(k in c(4:16)){ 
   accuracy=sum(comparison[,k]==comparison[,2])/nrow(comparison)
