@@ -148,7 +148,7 @@ Loading required package: grid
 > type1=sum(comparison[,1]>comparison[,2])/nrow(comparison)#probability that a case is predicted as delayed when it is in fact not delayed.
 > ## sum of type1 and type2 have to be 1.
 > 
-> basesave = function(expr, filename, print=T) {
+> basesave = function(expr, filename, print=T) { #here is a function to save and show plot at the same time
 +   #extension
 +   exten = stringr::str_match(filename, "\\.(\\w+)$")[, 2]
 +   
